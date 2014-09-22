@@ -98,6 +98,25 @@ gArea(HR)
 
 
 ########################################
+# Simulate a bimodal distribution, no holes
+x <- c(rnorm(500, 2, 2), rnorm(500, 20, 2)) 
+y <- rnorm(1000, 2, 2)
+xy <- cbind(x,y)
+
+xySP <- data.frame(xy)
+coordinates(xySP) <- ~x+y
+
+HR <- HRpolygon(xy)
+layout(1)
+plot(xySP, pch=20, cex=0.5, col="darkgrey")
+plot(HR, add=TRUE, col=rgb(0,0,0,0.2))
+# Obviously not a perfect model here
+
+# Get Are of home range
+gArea(HR)
+
+
+########################################
 # Simulate a unimodal distribution 
 x <- rnorm(500, 2, 2)
 y <- rnorm(500, 2, 2)
@@ -114,4 +133,3 @@ plot(HR, add=TRUE, col=rgb(0,0,0,0.2))
 
 # Get Are of home range
 gArea(HR)
-
