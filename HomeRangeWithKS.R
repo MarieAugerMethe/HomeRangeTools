@@ -2,30 +2,6 @@ library(ks)
 library(sp) # To create a spatial polygon
 library(rgeos) # To get area
 
-
-########################################
-# Simulate a multimodal distribution 
-# with one of the peak wuth a whole in the middle
-
-
-# Two modes
-# We can think of x as Easting/Lon part of animal locations
-x <- c(rnorm(500,5,3), rnorm(300,25,3))
-# We can think of y as Norting/Lat part of animal locations
-y <- c(rnorm(800,5,3))
-xy <- cbind(x,y)
-
-# remove the location in the middle of first mode
-xy <- xy[-which((dnorm(x,5,3) + dnorm(y,5,3)) > 0.2),]
-
-# Making 4 peaks with 2 holes
-xy <- rbind(xy,xy + matrix(c(0, 20), nrow=nrow(xy), ncol=2, byrow=TRUE))
-plot(xy, pch=20, cex=0.5, col="grey")
-
-# Create a spatial object, just to plots nicely
-xySP <- data.frame(xy)
-coordinates(xySP) <- ~x+y
-
 ###############################
 # Calculatin home range size using ks package
 
@@ -86,6 +62,31 @@ HRpolygon <- function(xy){
   return(spPoly)
 }
 
+
+########################################
+# Simulate a multimodal distribution 
+# with 4 of the peaks, two of which have a hole in the middle
+
+
+# Two modes
+# We can think of x as Easting/Lon part of animal locations
+x <- c(rnorm(500,5,3), rnorm(300,25,3))
+# We can think of y as Norting/Lat part of animal locations
+y <- c(rnorm(800,5,3))
+xy <- cbind(x,y)
+
+# remove the location in the middle of first mode
+xy <- xy[-which((dnorm(x,5,3) + dnorm(y,5,3)) > 0.2),]
+
+# Making 4 peaks with 2 holes
+xy <- rbind(xy,xy + matrix(c(0, 20), nrow=nrow(xy), ncol=2, byrow=TRUE))
+plot(xy, pch=20, cex=0.5, col="grey")
+
+# Create a spatial object, just to plots nicely
+xySP <- data.frame(xy)
+coordinates(xySP) <- ~x+y
+
+
 HR <- HRpolygon(xy)
 layout(1)
 plot(xySP, pch=20, cex=0.5, col="darkgrey")
@@ -94,3 +95,23 @@ plot(HR, add=TRUE, col=rgb(0,0,0,0.2))
 
 # Get Are of home range
 gArea(HR)
+
+
+########################################
+# Simulate a unimodal distribution 
+x <- rnorm(500, 2, 2)
+y <- rnorm(500, 2, 2)
+xy <- cbind(x,y)
+
+xySP <- data.frame(xy)
+coordinates(xySP) <- ~x+y
+
+HR <- HRpolygon(xy)
+layout(1)
+plot(xySP, pch=20, cex=0.5, col="darkgrey")
+plot(HR, add=TRUE, col=rgb(0,0,0,0.2))
+# Obviously not a perfect model here
+
+# Get Are of home range
+gArea(HR)
+
