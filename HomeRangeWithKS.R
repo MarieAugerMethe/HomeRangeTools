@@ -81,16 +81,18 @@ for(i in 1:length(contour.95)){
 
 # Is there a polygon within the other polygon, which would be a hole?
 isContained <- vector(length=length(contour.95))
-for(i in 1:length(contour.95)){
-  plot(xySP, pch=20, cex=0.5, col="grey")
-  spPoly1 <- SpatialPolygons(list(Polygons(pp[-i], ID=1)))
-  plot(spPoly1, add=TRUE, border="red")
-  spPoly2 <- SpatialPolygons(list(Polygons(pp[i], ID=1)))
-  plot(spPoly2, add=TRUE, border="pink")
-  isContained[i] <- gContains(spPoly1,spPoly2)
+# Only do this is you have more than one polygon
+if(length(isContained) > 1){
+  for(i in 1:length(contour.95)){
+    plot(xySP, pch=20, cex=0.5, col="grey")
+    spPoly1 <- SpatialPolygons(list(Polygons(pp[-i], ID=1)))
+    plot(spPoly1, add=TRUE, border="red")
+    spPoly2 <- SpatialPolygons(list(Polygons(pp[i], ID=1)))
+    plot(spPoly2, add=TRUE, border="pink")
+    isContained[i] <- gContains(spPoly1,spPoly2)
+  }  
 }
 
-# For the polygons that are contained
 # For the polygons that are contained
 holeID <- (1:length(contour.95))[isContained]
 if(length(holeID)>0){
