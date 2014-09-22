@@ -91,14 +91,21 @@ for(i in 1:length(contour.95)){
 }
 
 # For the polygons that are contained
+# For the polygons that are contained
 holeID <- (1:length(contour.95))[isContained]
-plot(xySP, pch=20, cex=0.5, col="grey")
-spPoly1 <- SpatialPolygons(list(Polygons(pp[-holeID], ID=1)))
-plot(spPoly1, add=TRUE, border="red")
-spPoly2 <- SpatialPolygons(list(Polygons(pp[holeID], ID=1)))
-plot(spPoly2, add=TRUE, border="blue")
-spPoly <- gDifference(spPoly1,spPoly2)
-plot(spPoly, add=TRUE, col="yellow")
+if(length(holeID)>0){
+  plot(xySP, pch=20, cex=0.5, col="grey")
+  spPoly1 <- SpatialPolygons(list(Polygons(pp[-holeID], ID=1)))
+  plot(spPoly1, add=TRUE, border="red")
+  spPoly2 <- SpatialPolygons(list(Polygons(pp[holeID], ID=1)))
+  plot(spPoly2, add=TRUE, border="blue")
+  spPoly <- gDifference(spPoly1,spPoly2)
+  plot(spPoly, add=TRUE, col="yellow")
+}else{
+  plot(xySP, pch=20, cex=0.5, col="grey")
+  spPoly <- SpatialPolygons(list(Polygons(pp, ID=1)))
+  plot(spPoly, add=TRUE, col="yellow")
+}
 
 # Get Are of home range
 gArea(spPoly)
