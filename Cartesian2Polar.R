@@ -43,5 +43,3 @@ text(cartCoord[,1],cartCoord[,2],labels=polarCoord2piText, cex=0.6, pos=1, col="
 thetaDeg <- theta2pi/(2*pi) * 360
 polarCoordDegText <- paste("(", round(r,1), ", ", round(thetaDeg,1), ")", sep="")
 text(cartCoord[,1],cartCoord[,2],labels=polarCoordDegText, cex=0.6, pos=3, col="green")
-
-
