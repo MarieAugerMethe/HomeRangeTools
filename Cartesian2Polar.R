@@ -39,4 +39,9 @@ theta2pi <- theta + ifelse(theta<0,2*pi,0)
 polarCoord2piText <- paste("(", round(r,1), ", ", round(theta2pi,1), ")", sep="")
 text(cartCoord[,1],cartCoord[,2],labels=polarCoord2piText, cex=0.6, pos=1, col="blue")
 
+# If you want the turn in degree instead of radian
+thetaDeg <- theta2pi/(2*pi) * 360
+polarCoordDegText <- paste("(", round(r,1), ", ", round(thetaDeg,1), ")", sep="")
+text(cartCoord[,1],cartCoord[,2],labels=polarCoordDegText, cex=0.6, pos=3, col="green")
+
 
