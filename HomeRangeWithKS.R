@@ -93,7 +93,7 @@ plot(xySP, pch=20, cex=0.5, col="darkgrey")
 plot(HR, add=TRUE, col=rgb(0,0,0,0.2))
 # Obviously not a perfect model here
 
-# Get Are of home range
+# Get Area of home range
 gArea(HR)
 
 
@@ -112,7 +112,7 @@ plot(xySP, pch=20, cex=0.5, col="darkgrey")
 plot(HR, add=TRUE, col=rgb(0,0,0,0.2))
 # Obviously not a perfect model here
 
-# Get Are of home range
+# Get Area of home range
 gArea(HR)
 
 
@@ -131,5 +131,6 @@ plot(xySP, pch=20, cex=0.5, col="darkgrey")
 plot(HR, add=TRUE, col=rgb(0,0,0,0.2))
 # Obviously not a perfect model here
 
-# Get Are of home range
+# Get Area of home range
 gArea(HR)
+
